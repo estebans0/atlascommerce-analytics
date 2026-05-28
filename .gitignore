@@ -1,0 +1,25 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment variables
+.env
+backend/.env
+frontend/.env
+frontend/atlascommerce-dashboard/.env
+
+# Node
+node_modules/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / Editor
+.DS_Store
+.vscode/
