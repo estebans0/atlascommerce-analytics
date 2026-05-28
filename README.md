@@ -1,4 +1,4 @@
 ## Live Demo
 
-- Frontend Dashboard: https://your-vercel-url.vercel.app
-- Backend API Docs: https://your-render-backend-url.onrender.com/docs
+- Frontend Dashboard: https://atlascommerce-analytics.vercel.app/
+- Backend API Docs: https://atlascommerce-analytics.onrender.com/docs
