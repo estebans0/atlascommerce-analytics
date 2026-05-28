@@ -14,7 +14,7 @@ export async function getRevenueByCategory() {
 }
 
 export async function getEventCounts() {
-  const response = await axios.get(`${API_BASE_URL}/analytics/event-counts`);
+  const response = await axios.get(`${API_BASE_URL}/analytics/interaction-summary`);
   return response.data;
 }
 

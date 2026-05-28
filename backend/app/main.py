@@ -43,8 +43,8 @@ def revenue_by_category():
     return get_revenue_by_category()
 
 
-@app.get("/analytics/event-counts")
-def event_counts():
+@app.get("/analytics/interaction-summary")
+def interaction_summary():
     return get_event_counts()
 
 

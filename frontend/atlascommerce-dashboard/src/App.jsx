@@ -82,17 +82,7 @@ function App() {
   useEffect(() => {
     async function loadDashboardData() {
       try {
-        const [
-          totalRevenueData,
-          revenueByCategoryData,
-          eventCountsData,
-          conversionRatesData,
-          underperformingData,
-          monthlyRevenueData,
-          monthlyGrowthData,
-          forecastData,
-          recommendationsData,
-        ] = await Promise.all([
+        const results = await Promise.allSettled([
           getTotalRevenue(),
           getRevenueByCategory(),
           getEventCounts(),
@@ -104,18 +94,23 @@ function App() {
           getRecommendations(1),
         ]);
 
-        setTotalRevenue(totalRevenueData);
-        setRevenueByCategory(revenueByCategoryData);
-        setEventCounts(eventCountsData);
-        setConversionRates(conversionRatesData);
-        setUnderperforming(underperformingData);
-        setMonthlyRevenue(monthlyRevenueData);
-        setMonthlyGrowth(monthlyGrowthData);
-        setForecast(forecastData);
-        setRecommendations(recommendationsData);
+        const getValue = (index, fallback) =>
+          results[index].status === "fulfilled" ? results[index].value : fallback;
+
+        setTotalRevenue(getValue(0, { total_revenue: 0 }));
+        setRevenueByCategory(getValue(1, []));
+        setEventCounts(getValue(2, []));
+        setConversionRates(getValue(3, []));
+        setUnderperforming(getValue(4, []));
+        setMonthlyRevenue(getValue(5, []));
+        setMonthlyGrowth(getValue(6, []));
+        setForecast(getValue(7, []));
+        setRecommendations(getValue(8, []));
       } catch (error) {
-        console.error("Error loading dashboard data:", error);
-        setLoadError("Unable to load dashboard data. Confirm that FastAPI is running on localhost:8000.");
+        console.error("Unexpected dashboard error:", error);
+        setLoadError(
+          "Unable to initialize the dashboard. Please verify that the backend API is available."
+        );
       } finally {
         setLoading(false);
       }
